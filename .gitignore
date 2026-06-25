@@ -16,3 +16,6 @@ Thumbs.db
 
 # superpowers session artifacts (brainstorm/plans already removed from tree)
 .superpowers/
+
+# process documentation (dev-only plans/specs, removed before publish)
+docs/
