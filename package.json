@@ -1,0 +1,37 @@
+{
+  "name": "songshufm",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:edge": "tsx scripts/build.ts edge",
+    "build:chrome": "tsx scripts/build.ts chrome",
+    "build:firefox": "tsx scripts/build.ts firefox",
+    "package:edge": "tsx scripts/package.ts edge",
+    "package:chrome": "tsx scripts/package.ts chrome",
+    "package:firefox": "tsx scripts/package.ts firefox",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@crxjs/vite-plugin": "^2.5.0",
+    "@preact/signals": "^1.3.1",
+    "preact": "^10.26.8",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.5",
+    "@types/archiver": "^8.0.0",
+    "@types/chrome": "^0.1.43",
+    "archiver": "^8.0.0",
+    "fake-indexeddb": "^5.0.2",
+    "jsdom": "^29.1.1",
+    "tsx": "^4.22.4",
+    "vitest": "^3.2.6"
+  }
+}

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>松鼠FM / SongshuFM — 隐私政策 / Privacy Policy</title>
+    <style>
+        :root {
+            --fg: #1f2328;
+            --fg-muted: #57606a;
+            --border: #d0d7de;
+            --bg-soft: #f6f8fa;
+            --accent: #0969da;
+            --code-bg: #f6f8fa;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --fg: #e6edf3;
+                --fg-muted: #8b949e;
+                --border: #30363d;
+                --bg-soft: #161b22;
+                --accent: #58a6ff;
+                --code-bg: #161b22;
+            }
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 28px 20px 64px;
+            line-height: 1.65;
+            color: var(--fg);
+            background: var(--bg-soft);
+            background: canvas;
+        }
+        .lang-switch {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 24px;
+        }
+        .lang-switch button {
+            border: 1px solid var(--border);
+            background: var(--bg-soft);
+            color: var(--fg-muted);
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .lang-switch button.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+        main { background: var(--bg-soft); background: canvas; }
+        h1 { font-size: 1.6em; margin: 0 0 4px; }
+        h2 { color: var(--fg); margin-top: 2.2em; font-size: 1.2em; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+        h3 { color: var(--fg); margin-top: 1.6em; font-size: 1.02em; }
+        p, li { color: var(--fg); }
+        .last-updated { color: var(--fg-muted); font-size: 0.9em; margin-top: 0; }
+        code { background: var(--code-bg); padding: 1px 6px; border-radius: 4px; font-size: 0.88em; }
+        ul { padding-left: 1.4em; }
+        li { margin: 4px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.92em; }
+        th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+        th { background: var(--bg-soft); }
+        a { color: var(--accent); }
+        .section { display: none; }
+        .section.active { display: block; }
+        .callout { background: var(--bg-soft); border-left: 3px solid var(--accent); padding: 10px 14px; margin: 14px 0; border-radius: 0 6px 6px 0; }
+        .footer { margin-top: 3em; padding-top: 16px; border-top: 1px solid var(--border); color: var(--fg-muted); font-size: 0.85em; }
+    </style>
+</head>
+<body>
+    <div class="lang-switch">
+        <button id="btn-zh" class="active" onclick="show('zh')">中文</button>
+        <button id="btn-en" onclick="show('en')">English</button>
+    </div>
+
+    <!-- ===================== 中文版 ===================== -->
+    <main id="zh" class="section active">
+        <h1>松鼠FM 隐私政策</h1>
+        <p class="last-updated">最后更新日期：2026年6月25日</p>
+
+        <div class="callout">
+            <strong>一句话概括：</strong>松鼠FM 不收集、不上传、不分析任何个人数据。所有播放数据、订阅、设置都只保存在您的浏览器本地。我们无法"看到"您。
+        </div>
+
+        <h2>1. 我们不收集什么</h2>
+        <p>松鼠FM 没有服务器、没有数据库、没有账号系统，也没有任何用户追踪或埋点分析（无 Google Analytics、无遥测）。我们无法识别您是谁，也无法获取您的收听记录。</p>
+
+        <h2>2. 数据存储（仅本地）</h2>
+        <p>所有数据都只存于您的浏览器本地，卸载扩展后即被清除：</p>
+        <table>
+            <tr><th>存储位置</th><th>用途</th></tr>
+            <tr><td><code>IndexedDB</code></td><td>播客订阅、剧集、播放历史、收藏、播放进度</td></tr>
+            <tr><td><code>chrome.storage.local</code></td><td>用户设置、界面偏好、缓存索引</td></tr>
+        </table>
+        <p>下载缓存的音频文件通过浏览器下载目录的 <code>songshuFM/</code> 子文件夹保存，仅存于您的设备。</p>
+
+        <h2>3. 网络访问与第三方服务</h2>
+        <p>扩展运行时，您的浏览器会直接向以下服务发起请求（不经我们）：：</p>
+        <table>
+            <tr><th>服务</th><th>用途</th><th>是否含个人数据</th></tr>
+            <tr><td>iTunes Search API<br><code>itunes.apple.com</code></td><td>按关键字搜索播客目录</td><td>否（仅搜索关键词）</td></tr>
+            <tr><td>小宇宙 API<br><code>xiaoyuzhoufm.com</code></td><td>搜索与展示小宇宙平台节目</td><td>否</td></tr>
+            <tr><td>RSS 订阅源</td><td>拉取您主动订阅的播客更新</td><td>否</td></tr>
+            <tr><td>音频 CDN</td><td>流式播放与下载 RSS 源中提供的音频</td><td>否</td></tr>
+            <tr><td>WebDAV 服务器<br>（仅当您主动配置时）</td><td>把您的本地数据同步到您自己的网盘</td><td>是（数据仅传给您指定的服务器，不经我们）</td></tr>
+        </table>
+        <p>除上述场景外，扩展不会向任何第三方传输数据。</p>
+
+        <h2>4. 权限说明</h2>
+        <p>松鼠FM 申请的每一项权限都有明确用途，遵循最小权限原则：</p>
+        <table>
+            <tr><th>权限</th><th>用途</th></tr>
+            <tr><td><code>storage</code></td><td>保存订阅、播放进度、设置</td></tr>
+            <tr><td><code>unlimitedStorage</code></td><td>缓存离线音频文件，供无网络时收听</td></tr>
+            <tr><td><code>offscreen</code></td><td>创建后台音频播放所需的离屏文档，使关闭窗口后仍能继续播放</td></tr>
+            <tr><td><code>alarms</code></td><td>按设定频率定期检查订阅播客的更新</td></tr>
+            <tr><td><code>notifications</code></td><td>有新剧集时向您发送系统通知</td></tr>
+            <tr><td><code>downloads</code></td><td>把音频下载到本地用于离线缓存</td></tr>
+            <tr><td><code>sidePanel</code></td><td>在浏览器侧边栏提供持久的播放界面</td></tr>
+        </table>
+
+        <h3>关于 <code>所有网站（host）访问权限</code></h3>
+        <p>由于播客的 RSS 源和音频文件托管在互联网上的任意域名（每个播客都不同），且用户可自行添加任意订阅源与 WebDAV 服务器，扩展需要在运行时向这些用户指定的地址发起请求。因此扩展申请了对所有网站的访问权限。该权限<strong>仅用于</strong>：</p>
+        <ul>
+            <li>拉取用户主动订阅的 RSS 源</li>
+            <li>播放/下载这些 RSS 源里的音频</li>
+            <li>连接用户自行配置的 WebDAV 服务器</li>
+        </ul>
+        <p>扩展不会读取、修改或注入内容到您浏览的网页，也不会收集网页信息。</p>
+
+        <h2>5. 第三方链接</h2>
+        <p>应用内的"在网页中打开"等链接会调用浏览器跳转到外部网站。一旦离开本扩展，即受目标网站自身的隐私政策约束。</p>
+
+        <h2>6. 儿童隐私</h2>
+        <p>松鼠FM 面向普通用户，不针对 13 岁以下儿童，也不有意收集儿童信息。</p>
+
+        <h2>7. 政策更新</h2>
+        <p>本政策若更新，将在本页面与 GitHub 仓库同步发布，并以页面顶部的"最后更新日期"为准。</p>
+
+        <h2>8. 联系我们</h2>
+        <ul>
+            <li>GitHub Issues：<a href="https://github.com/deluo/songshuFM/issues">github.com/deluo/songshuFM/issues</a></li>
+            <li>邮箱：476927272@qq.com</li>
+        </ul>
+
+        <div class="footer">本应用为开源项目，源代码：<a href="https://github.com/deluo/songshuFM">github.com/deluo/songshuFM</a>。您可以随时审阅。</div>
+    </main>
+
+    <!-- ===================== English ===================== -->
+    <main id="en" class="section">
+        <h1>SongshuFM Privacy Policy</h1>
+        <p class="last-updated">Last updated: June 25, 2026</p>
+
+        <div class="callout">
+            <strong>In one sentence:</strong> SongshuFM does not collect, upload, or analyze any personal data. All playback data, subscriptions, and settings live only in your browser. We cannot "see" you.
+        </div>
+
+        <h2>1. What We Do NOT Collect</h2>
+        <p>SongshuFM has no server, no database, no account system, and no user tracking or analytics (no Google Analytics, no telemetry). We cannot identify who you are, nor access your listening history.</p>
+
+        <h2>2. Data Storage (Local Only)</h2>
+        <p>All data is stored only in your browser and is removed when you uninstall the extension:</p>
+        <table>
+            <tr><th>Location</th><th>Used For</th></tr>
+            <tr><td><code>IndexedDB</code></td><td>Subscriptions, episodes, playback history, favorites, playback progress</td></tr>
+            <tr><td><code>chrome.storage.local</code></td><td>User settings, UI preferences, cache index</td></tr>
+        </table>
+        <p>Downloaded/cached audio files are saved in the <code>songshuFM/</code> subfolder of your browser's download directory, on your device only.</p>
+
+        <h2>3. Network Access &amp; Third-Party Services</h2>
+        <p>While running, your browser makes direct requests to the following services (never routed through us):</p>
+        <table>
+            <tr><th>Service</th><th>Purpose</th><th>Personal Data?</th></tr>
+            <tr><td>iTunes Search API<br><code>itunes.apple.com</code></td><td>Search the podcast directory by keyword</td><td>No (search keywords only)</td></tr>
+            <tr><td>Xiaoyuzhou API<br><code>xiaoyuzhoufm.com</code></td><td>Search &amp; display Xiaoyuzhou shows</td><td>No</td></tr>
+            <tr><td>RSS feeds</td><td>Fetch updates for podcasts you subscribe to</td><td>No</td></tr>
+            <tr><td>Audio CDNs</td><td>Stream &amp; download audio from RSS feeds</td><td>No</td></tr>
+            <tr><td>WebDAV server<br>(only if you configure it)</td><td>Sync your local data to your own cloud drive</td><td>Yes (sent only to the server you specify, never through us)</td></tr>
+        </table>
+        <p>Outside these scenarios, the extension does not transmit data to any third party.</p>
+
+        <h2>4. Permissions</h2>
+        <p>Every permission SongshuFM requests has a clear purpose and follows the principle of least privilege:</p>
+        <table>
+            <tr><th>Permission</th><th>Purpose</th></tr>
+            <tr><td><code>storage</code></td><td>Save subscriptions, playback progress, settings</td></tr>
+            <tr><td><code>unlimitedStorage</code></td><td>Cache offline audio files for listening without network</td></tr>
+            <tr><td><code>offscreen</code></td><td>Create the offscreen document needed for background audio, so playback continues after the window closes</td></tr>
+            <tr><td><code>alarms</code></td><td>Periodically check subscribed feeds for updates on a schedule</td></tr>
+            <tr><td><code>notifications</code></td><td>Send you a system notification when new episodes arrive</td></tr>
+            <tr><td><code>downloads</code></td><td>Download audio locally for offline caching</td></tr>
+            <tr><td><code>sidePanel</code></td><td>Provide a persistent playback UI in the browser side panel</td></tr>
+        </table>
+
+        <h3>About the <code>all-websites (host) permission</code></h3>
+        <p>Because podcast RSS feeds and audio files are hosted on arbitrary domains across the internet (every podcast is different), and users may add any feed or WebDAV server themselves, the extension must request access to all websites at runtime. This permission is <strong>only</strong> used to:</p>
+        <ul>
+            <li>Fetch RSS feeds you actively subscribe to</li>
+            <li>Play/download audio from those RSS feeds</li>
+            <li>Connect to the WebDAV server you configure yourself</li>
+        </ul>
+        <p>The extension does not read, modify, or inject content into the web pages you browse, and does not collect page information.</p>
+
+        <h2>5. Third-Party Links</h2>
+        <p>Links such as "Open on website" use your browser to navigate to external sites. Once you leave the extension, the destination site's own privacy policy applies.</p>
+
+        <h2>6. Children's Privacy</h2>
+        <p>SongshuFM is intended for general audiences, is not directed at children under 13, and does not knowingly collect information from children.</p>
+
+        <h2>7. Policy Updates</h2>
+        <p>If this policy is updated, it will be published on this page and in the GitHub repository. The "Last updated" date at the top is authoritative.</p>
+
+        <h2>8. Contact</h2>
+        <ul>
+            <li>GitHub Issues: <a href="https://github.com/deluo/songshuFM/issues">github.com/deluo/songshuFM/issues</a></li>
+            <li>Email: 476927272@qq.com</li>
+        </ul>
+
+        <div class="footer">This is an open-source project. Source code: <a href="https://github.com/deluo/songshuFM">github.com/deluo/songshuFM</a>. You may audit it at any time.</div>
+    </main>
+
+    <script>
+        function show(lang) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(lang).classList.add('active');
+            document.querySelectorAll('.lang-switch button').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+export const MSG = {
+  SEARCH_REQUEST: 'search:request',
+  SEARCH_RESULT: 'search:result',
+  SEARCH_ERROR: 'search:error',
+  EXTRACT_RESULT: 'extract:result',
+  PLAY: 'player:play',
+  PAUSE: 'player:pause',
+  TOGGLE: 'player:toggle',
+  SEEK: 'player:seek',
+  VOLUME: 'player:volume',
+  SPEED: 'player:speed',
+  NEXT: 'player:next',
+  PREV: 'player:prev',
+  STATE_UPDATE: 'player:stateUpdate',
+  STATE_RESPONSE: 'player:stateResponse',
+  GET_STATE: 'player:getState',
+  GET_PLAYLIST: 'playlist:get',
+  SET_PLAYLIST: 'playlist:set',
+  ENDED: 'player:ended',
+  ENSURE_OFFSCREEN: 'offscreen:ensure',
+  SETTINGS_UPDATE: 'settings:updateCache',
+  GET_HOME_DATA: 'home:getData',
+  HOME_DATA_UPDATE: 'home:dataUpdate',
+  GET_PLAY_HISTORY: 'history:get',
+  PLAY_HISTORY_ADD: 'history:add',
+  PLAY_HISTORY_REMOVE: 'history:remove',
+  PLAY_HISTORY_CLEAR: 'history:clear',
+  SUBSCRIBE: 'subscribe:add',
+  UNSUBSCRIBE: 'subscribe:remove',
+  GET_SUBSCRIPTIONS: 'subscribe:get',
+  GET_SETTINGS: 'settings:get',
+  UPDATE_SETTINGS: 'settings:update',
+  CHECK_UPDATES: 'updates:check',
+  UPDATE_FOUND: 'updates:found',
+  GET_PODCAST_DETAIL: 'podcast:getDetail',
+  PODCAST_DETAIL_UPDATE: 'podcast:detailUpdate',
+  MARK_PODCAST_READ: 'podcast:markRead',
+  FETCH_COVER: 'podcast:fetchCover',
+  GET_PLAYING_STATE: 'playingState:get',
+  SET_PLAYING_STATE: 'playingState:set',
+  OFFSCREEN_READY: 'offscreen:ready',
+  GET_COMMENTS: 'comments:get',
+  COMMENTS_RESULT: 'comments:result',
+  FAVORITE_ADD: 'favorite:add',
+  FAVORITE_REMOVE: 'favorite:remove',
+  FAVORITE_GET_ALL: 'favorite:getAll',
+  FAVORITE_CHECK: 'favorite:check',
+  SEARCH_HISTORY_GET: 'searchHistory:get',
+  SEARCH_HISTORY_ADD: 'searchHistory:add',
+  SEARCH_HISTORY_CLEAR: 'searchHistory:clear',
+  STATS_GET: 'stats:get',
+  STATS_REBUILD: 'stats:rebuild',
+  LISTEN_DURATION_REPORT: 'listenDuration:report',
+  GET_PLAY_POSITION: 'playPosition:get',
+  PLAY_POSITION_UPDATE: 'playPosition:update',
+  AUDIO_CACHE_SET: 'audioCache:set',
+  AUDIO_CACHE_CLEANUP: 'audioCache:cleanup',
+  AUDIO_CACHE_GET_STATS: 'audioCache:getStats',
+  AUDIO_DOWNLOAD_START: 'audioCache:downloadStart',
+  AUDIO_DOWNLOAD_PROGRESS: 'audioCache:downloadProgress',
+  AUDIO_DOWNLOAD_COMPLETE: 'audioCache:downloadComplete',
+  AUDIO_DOWNLOAD_CANCEL: 'audioCache:downloadCancel',
+  AUDIO_CACHE_DELETE: 'audioCache:delete',
+  AUDIO_CACHE_CHECK: 'audioCache:checkCache',
+  AUDIO_CACHE_GET_ALL: 'audioCache:getAll',
+  AUDIO_CACHE_CLEAR: 'audioCache:clearAll',
+  AUDIO_OPEN_FOLDER: 'audioCache:openFolder',
+  EXPORT_DATA: 'data:export',
+  IMPORT_DATA: 'data:import',
+  IMPORT_OPML: 'data:importOpml',
+  IMPORT_OPML_PROGRESS: 'data:importOpmlProgress',
+  WEBDAV_CONFIG_GET: 'webdav:configGet',
+  WEBDAV_CONFIG_SET: 'webdav:configSet',
+  WEBDAV_SYNC_NOW: 'webdav:syncNow',
+  WEBDAV_STATUS: 'webdav:status',
+  WEBDAV_SYNC_DONE: 'webdav:syncDone',
+  POPUP_CLOSED: 'popup:closed',
+  GET_EPISODE_SHOWNOTES: 'episode:shownotes',
+  UPDATE_EPISODE_NOTES: 'episode:updateNotes',
+  FETCH_RSS_FEED: 'rss:fetchFeed',
+  FETCH_AUDIO_URL: 'rss:fetchAudioUrl',
+  LOCAL_SEARCH_EPISODES: 'search:localEpisodes',
+} as const;
+
+export type MsgType = (typeof MSG)[keyof typeof MSG];
+
+export function sendMessage<T = any>(
+  type: string,
+  data?: Record<string, any>,
+): Promise<T> {
+  return chrome.runtime.sendMessage({ type, ...data }).then((response: any) => {
+    if (response?.success) return response.data as T;
+    throw new Error(response?.error || 'Unknown error');
+  });
+}
+
+// Fire-and-forget broadcast: popup/SW may be absent when sent, which is the
+// normal case for one-way updates (STATE_UPDATE, HOME_DATA_UPDATE, etc.).
+// Centralizes the `.catch(() => {})` pattern that was scattered across files.
+export function broadcast(type: string, data?: Record<string, any>): void {
+  chrome.runtime.sendMessage({ type, ...data }).catch(() => {});
+}
